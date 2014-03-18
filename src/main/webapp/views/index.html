@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app>
+<!-- <html lang="zh-CN" manifest="cache.manifest" ng-app="imessage"> -->
+<head>
+<meta charset="UTF-8">
+<title>imessage</title>
+<link href="script/bootstrap/css/global.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="script/bootstrap/css/responsive.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="style/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="style/bootstrap-input.css" rel="stylesheet" type="text/css" media="screen">
+
+<script src="script/jquery/jquery.min.js"></script>
+<script src="script/bootstrap/js/bootstrap.min.js"></script>
+<script src="script/angular.min.js"></script>
+<script src="script/script.js"></script>
+</head>
+
+
+<body>
+	<!-- 导航 -->
+	<div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="#about">关于</a></li>
+					</ul>
+				</div>
+
+				<ul class="nav">
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<header class="hero-unit no-radius">
+		<!-- 可以显示一些介绍之类的东东 -->
+		<p>本系统采用node.js angularjs springmvc redis html5 bootstrap
+		<p>
+		<p>
+			author：<a href="mailto:yuanlin1382@126.com">园林</a>
+		</p>
+	</header>
+
+	<article class="container" ng-controller="imessageContextController">
+		<section class="row" ng-repeat="item in items">
+			<div class="span12 panel">
+				<div class="row">
+					<div class="span12">
+						<div class="block-left">
+							<h3>
+								<img alt="" src="1.jpg" class="show_user_images_item">{{item.title}}
+							</h3>
+							<p>{{item.messageContext}}</p>
+							<p class="show_reply_context">
+								<img alt="" src="1.jpg" class="show_user_images_item">：荼靡们说，你是那身着一袭白衣，温润如玉的少年，手撑一柄油纸伞，踏过青石板
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						<div class="input-group block-span-left">
+							<input type="text" class="form-control" placeholder="我也说一句">
+							<span class="input-group-addon">&nbsp;发表</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</article>
+</body>
+<script type="text/javascript">
+function imessageContextController($scope){
+	$scope.pageIndex = 0;
+	$scope.pageSize = 10;
+	$scope.total = '';
+	$scope.feeds = [];
+	$scope.doGetMore = function(){
+		isLoad = false;
+		$scope.pageIndex++;
+		$.post('feed/getFeed',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize,function(r){
+			r = toJson(r).r;
+			for (var i = 0,item;item = r.resoult[i];i++){
+				var serviceData = item.formatDatas;
+				delete item.formatDatas;
+				$.extends(item,serviceData);
+				$scope.feeds.push(item);
+			}
+			$scope.$apply();
+			isLoad = true;
+			if ($scope.feeds.length >= r.totalCount) {
+				isAll = true;
+			}
+		}});
+	};
+	$scope.doGetMore();
+	
+	
+	$scope.getTime = function(){
+		return new Date().getTime();
+	};
+	
+	var isLoad = true;
+	var isAll = false;
+	
+	scollService.bindSelector('.feed:last', function(){
+		if(isLoad && !isAll){
+			$scope.doGetMore();
+		}
+	});
+	
+// 	$.get('static/test/login', function(data){
+// 		data = toJson(data);
+// 		console.log(data);
+// 		$scope.items = data.r;
+// 		$scope.$apply();
+// 	});
+}
+</script>
+</html>
