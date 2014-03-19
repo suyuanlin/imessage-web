@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" ng-app>
+<html lang="zh-CN" ng-app="imessage">
 <!-- <html lang="zh-CN" manifest="cache.manifest" ng-app="imessage"> -->
 <head>
 <meta charset="UTF-8">
@@ -44,13 +44,12 @@
 		<!-- 可以显示一些介绍之类的东东 -->
 		<p>本系统采用node.js angularjs springmvc redis html5 bootstrap
 		<p>
-		<p>
-			author：<a href="mailto:yuanlin1382@126.com">园林</a>
+			author：<a href="mailto:yuanlin1382@126.com"></a>
 		</p>
 	</header>
 
 	<article class="container" ng-controller="imessageContextController">
-		<section class="row" ng-repeat="item in items">
+		<section class="row feed" ng-repeat="item in feeds">
 			<div class="span12 panel">
 				<div class="row">
 					<div class="span12">
@@ -78,7 +77,7 @@
 	</article>
 </body>
 <script type="text/javascript">
-function imessageContextController($scope){
+function imessageContextController($scope,scollService){
 	$scope.pageIndex = 0;
 	$scope.pageSize = 10;
 	$scope.total = '';
@@ -86,12 +85,13 @@ function imessageContextController($scope){
 	$scope.doGetMore = function(){
 		isLoad = false;
 		$scope.pageIndex++;
-		$.post('feed/getFeed',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize,function(r){
+		$.post('static/test/login',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
 			r = toJson(r).r;
-			for (var i = 0,item;item = r.resoult[i];i++){
-				var serviceData = item.formatDatas;
+			console.log(r);
+			for (var i = 0,item;item = r[i];i++){
+				var serviceData = toJson(item.formatDatas);
 				delete item.formatDatas;
-				$.extends(item,serviceData);
+				$.extend(item,serviceData);
 				$scope.feeds.push(item);
 			}
 			$scope.$apply();
@@ -99,10 +99,9 @@ function imessageContextController($scope){
 			if ($scope.feeds.length >= r.totalCount) {
 				isAll = true;
 			}
-		}});
+		});
 	};
 	$scope.doGetMore();
-	
 	
 	$scope.getTime = function(){
 		return new Date().getTime();
@@ -117,12 +116,8 @@ function imessageContextController($scope){
 		}
 	});
 	
-// 	$.get('static/test/login', function(data){
-// 		data = toJson(data);
-// 		console.log(data);
-// 		$scope.items = data.r;
-// 		$scope.$apply();
-// 	});
+	
+
 }
 </script>
 </html>
