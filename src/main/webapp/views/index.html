@@ -85,7 +85,7 @@ function imessageContextController($scope,scollService){
 	$scope.doGetMore = function(){
 		isLoad = false;
 		$scope.pageIndex++;
-		$.post('static/test/login',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
+		$.post('static/messages',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
 			r = toJson(r).r;
 			console.log(r);
 			for (var i = 0,item;item = r[i];i++){
