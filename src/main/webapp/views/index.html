@@ -55,9 +55,9 @@
 					<div class="span12">
 						<div class="block-left">
 							<h3>
-								<img alt="" src="1.jpg" class="show_user_images_item">{{item.title}}
+								<img alt="" src="1.jpg" class="show_user_images_item">{{item.serviceData.title}}
 							</h3>
-							<p>{{item.messageContext}}</p>
+							<p>{{item.serviceData.messageContext}}</p>
 							<p class="show_reply_context">
 								<img alt="" src="1.jpg" class="show_user_images_item">：荼靡们说，你是那身着一袭白衣，温润如玉的少年，手撑一柄油纸伞，踏过青石板
 							</p>
@@ -87,12 +87,12 @@ function imessageContextController($scope,scollService){
 		$scope.pageIndex++;
 		$.post('static/messages',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
 			r = toJson(r).r;
-			console.log(r);
-			for (var i = 0,item;item = r[i];i++){
+			for (var i = 0,item;item = r.results[i];i++){
 				var serviceData = toJson(item.formatDatas);
 				delete item.formatDatas;
 				$.extend(item,serviceData);
 				$scope.feeds.push(item);
+				console.log(item);
 			}
 			$scope.$apply();
 			isLoad = true;
