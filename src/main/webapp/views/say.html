@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="imessage">
+<!-- <html lang="zh-CN" manifest="cache.manifest" ng-app="imessage"> -->
+<head>
+<meta charset="UTF-8">
+<title>imessage</title>
+<link href="script/bootstrap/css/global.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="script/bootstrap/css/responsive.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="style/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="style/bootstrap-input.css" rel="stylesheet" type="text/css" media="screen">
+
+<script src="script/jquery/jquery.min.js"></script>
+<script src="script/bootstrap/js/bootstrap.min.js"></script>
+<script src="script/angular.min.js"></script>
+<script src="script/script.js"></script>
+</head>
+
+
+<body>
+	<!-- 导航 -->
+	<div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="views/say.html">说说</a></li>
+						<li><a href="#about">关于</a></li>
+					</ul>
+				</div>
+
+				<ul class="nav">
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<header class="headH">
+		
+	</header>
+
+	<article class="container">
+		<section class="row feed">
+			<form action="static/manage/shareSay">
+			<div class="span12 panel">
+				<div class="row">
+					<div class="span12 block-left">
+						<input class="input-group" type="text" name="title" placeholder="键入标题，可以不写">
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						<div class="block-left margin-d30">
+							<textarea name="messageContext" rows="5" placeholder="说说现在的心情吧"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span12">
+						<div class="block-left margin-d30">
+							<button>发表</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</section>
+	</article>
+</body>
+</html>
