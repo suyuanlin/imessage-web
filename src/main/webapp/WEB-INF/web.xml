@@ -51,7 +51,7 @@
 	
 	
 	<welcome-file-list>
-		<welcome-file>/views/say.html</welcome-file>
+		<welcome-file>/views/index.html</welcome-file>
 	</welcome-file-list>
 
 	<!-- Error page define -->

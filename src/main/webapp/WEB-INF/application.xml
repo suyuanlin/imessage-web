@@ -27,4 +27,5 @@
 	</bean>
 
 	<import resource="classpath:applicationContext-server.xml" />
+	<import resource="classpath:dispatcherContext.xml" />
 </beans>
