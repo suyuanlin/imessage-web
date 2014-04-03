@@ -4,15 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <title>imessage</title>
-<link href="script/bootstrap/css/global.min.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="script/bootstrap/css/responsive.min.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="style/style.css" rel="stylesheet" type="text/css" media="screen">
-<link href="style/bootstrap-input.css" rel="stylesheet" type="text/css" media="screen">
+<link href="http://127.0.0.1:8080/imessage-web/script/bootstrap/css/global.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://127.0.0.1:8080/imessage-web/script/bootstrap/css/responsive.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://127.0.0.1:8080/imessage-web/style/style.css" rel="stylesheet" type="text/css" media="screen">
+<link href="http://127.0.0.1:8080/imessage-web/style/bootstrap-input.css" rel="stylesheet" type="text/css" media="screen">
 
-<script src="script/jquery/jquery.min.js"></script>
-<script src="script/bootstrap/js/bootstrap.min.js"></script>
-<script src="script/angular.min.js"></script>
-<script src="script/script.js"></script>
+<script src="http://127.0.0.1:8080/imessage-web/script/jquery/jquery.min.js"></script>
+<script src="http://127.0.0.1:8080/imessage-web/script/bootstrap/js/bootstrap.min.js"></script>
+<script src="http://127.0.0.1:8080/imessage-web/script/angular.min.js"></script>
+<script src="http://127.0.0.1:8080/imessage-web/script/script.js"></script>
 </head>
 
 
@@ -28,7 +28,7 @@
 
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="static/say">说说</a></li>
+						<li><a href="say.htm">说说</a></li>
 						<li><a href="#about">关于</a></li>
 					</ul>
 				</div>
@@ -86,7 +86,7 @@ function imessageContextController($scope,scollService){
 	$scope.doGetMore = function(){
 		isLoad = false;
 		$scope.pageIndex++;
-		$.post('static/messages',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
+		$.post('messages.htm',{pageIndex:$scope.pageIndex,pageSize:$scope.pageSize},function(r){
 			r = toJson(r).r;
 			for (var i = 0,item;item = r.results[i];i++){
 				var serviceData = toJson(item.formatDatas);
